@@ -1,37 +1,58 @@
-## THE API file
-### The API calls
-```
-- loadSecret(file_with_client_id_secret)
-    returns credentials
-- getAuthToken(credentials)
-    returns token
-- getVideosCount(token, account_number)
-    returns count
-- getVideos(token, account, videosCount, skip, sleepTime, limit)
-    returns movieArray
-
-```
 
 
-## The Client file
-include API file: <br>
-    -> from api.calls import *
-### To get an array of all movies
-```
+## To run this program
 - open a command shell
-- git clone https://github.com/LFP-Broadcasting/bc_calls.git
-- cd bc_calls
-- python get_ref_ids.sample.py
+```bash
 
+ git clone https://github.com/LFP-Broadcasting/bc_calls.git
+ ```
+ ```bash
+  cd bc_calls
 ```
 
 
 
-### To get a text of all sorted actors
+## To get an array of all movies
+
+
+```bash
+python get_ref_ids.sample.py # returns video list
 ```
-- open a command shell
-- git clone https://github.com/LFP-Broadcasting/bc_calls.git
-- cd bc_calls
-- python get_ordered_stars.sample.py
-- stars get written to a file called: "stars_blHCGforGG.txt"
+ 
+
+## To get a text of all sorted actors
+
+```bash
+python get_ordered_stars.sample.py #returns a video list sorted by actors
+```
+
+
+## To update videos on the platform
+
+```bash
+python update_videos.sample.py #returns true once all videos are updated
+```
+
+
+```
+HTTP/1.1 200 OK
+{
+    "success": true,
+    "code": "blacklist.created",
+    "message": "blacklist.created",
+    "errors": null,
+    "params": [],
+    "context": null  
+}
+```
+```
+HTTP/1.1 400 Bad Request
+{
+    "success": false,
+    "code": "blacklist.notcreated",
+    "message": "",
+    "context": null,
+    "errors": null,
+    "params": []
+}
 ```
