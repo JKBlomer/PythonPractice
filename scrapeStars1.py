@@ -17,33 +17,24 @@ f3 = open("test_stars_missing.txt", "w+") if test else open("stars_missing.txt",
 
 def main():
 	# import actors from csv, pass to scraper, create star
-	file = 'sample_actors.csv' if test else 'female_actors_list.csv'
-	with open(file) as actor_file:
-		csv_reader = csv.reader(actor_file, delimiter=',')
-		line_count = 0
-		ourStar = True
-		for row in csv_reader:
+	# file = 'sample_actors.csv' if test else 'female_actors_list.csv'
+	file = open("glamour_stars1.txt", "r")
+	
+	stars = file.read()
+	stars_list = stars.split(",")
+	line_count = 0
+	for s in stars_list:
+		star = s.split()
+		if(len(star)>1):
+			scraped = scrapeSite(star)
 			
-			if row[0] != "":
-			
-				
-				col1 = row[0].split()
-				col2 = row[1].split()
-				
-				
-				# scraped = scrapeSite(col2)
-				scraped = scrapeSite(row)
-				
-				if scraped != None:
-					social = getSocial(scraped["social"])
-					bio = getBio(scraped["bio"])
-					createStar(row, social, bio)
-			
-			
-			line_count += 1
-			sleep(1) if test else sleep(3)
-			
-
+			if scraped != None:
+				social = getSocial(scraped["social"])
+				bio = getBio(scraped["bio"])
+				createStar(star, social, bio)
+			 
+		line_count += 1
+		sleep(1) if test else sleep(3)
 
 def createStar(name, social, bio):
 	star = {}
@@ -182,9 +173,9 @@ main()
 # for star in stars:
 # 	for a in star:
 # 		if a != "key":
-# 			print(star[a], end=';', file=fo)
+# 			print(star[a], end=';', file=f1)
 # 		else:
-# 			print(star[a], end='\n', file=fo)
+# 			print(star[a], end='\n', file=f1)
 
 
 
@@ -204,4 +195,5 @@ main()
 f1.close()
 f2.close()
 f3.close()
+
 print("COMPLETE")
